@@ -3,11 +3,19 @@ import { expand } from 'dotenv-expand';
 
 import { ZodError, z } from 'zod';
 
+const stringBoolean = z.coerce
+	.string()
+	.transform((val) => {
+		return val === 'true';
+	})
+	.default('false');
+
 const EnvSchema = z.object({
 	NODE_ENV: z.string().default('development'),
 	SUPABASE_URL: z.string(),
 	SUPABASE_ANON_KEY: z.string(),
 	DATABASE_URL: z.string(),
+	DB_SEEDING: stringBoolean,
 });
 
 export type EnvSchema = z.infer<typeof EnvSchema>;

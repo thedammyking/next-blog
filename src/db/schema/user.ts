@@ -1,21 +1,22 @@
 import { relations, sql } from 'drizzle-orm';
-import { uuid, text, pgTable, pgEnum, timestamp } from 'drizzle-orm/pg-core';
+import {
+	uuid,
+	text,
+	varchar,
+	pgTable,
+	pgEnum,
+	timestamp,
+} from 'drizzle-orm/pg-core';
 import { post } from './post';
 import { comment } from './comment';
 import { UserRoles } from '@/types/db';
-
-export const roleEnum = pgEnum('role', [
-	UserRoles.SuperAdmin,
-	UserRoles.Editor,
-	UserRoles.Reader,
-]);
 
 export const user = pgTable('users', {
 	id: uuid('id').primaryKey().defaultRandom(),
 	name: text('name').notNull(),
 	email: text('email').unique().notNull(),
 	password: text('password').notNull(),
-	role: roleEnum('role').default(UserRoles.Reader),
+	role: varchar('role').default(UserRoles.Reader),
 	createdAt: timestamp('created_at', {
 		mode: 'string',
 		withTimezone: true,

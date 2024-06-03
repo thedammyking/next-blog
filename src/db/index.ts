@@ -10,7 +10,7 @@ export const connection = postgres(env.DATABASE_URL, {
 	prepare: false,
 });
 
-const db = drizzle(connection, {
+export const db = drizzle(connection, {
 	schema,
 	logger: true,
 });
