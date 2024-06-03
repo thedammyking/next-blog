@@ -1,9 +1,20 @@
-import apiEnv from '@/data/apiEnv';
+import env from '@/env/api';
 import 'dotenv/config';
+
+import * as schema from '@/db/schema';
 
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 
-export const client = postgres(apiEnv.DATABASE_URL, { prepare: false });
+export const connection = postgres(env.DATABASE_URL, {
+	prepare: false,
+});
 
-export default drizzle(client);
+const db = drizzle(connection, {
+	schema,
+	logger: true,
+});
+
+export type db = typeof db;
+
+export default db;
