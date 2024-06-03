@@ -1,0 +1,53 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "extends": ["eslint:recommended", "next/core-web-vitals", "prettier"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error",
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "no-undef": "error",
+    "no-unused-vars": "off",
+    "no-unsafe-finally": "off"
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
+  },
+  "overrides": [
+    {
+      "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+      "rules": {
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // Packages `react` related packages come first.
+              ["^react", "^@?\\w"],
+              // Internal packages.
+              ["^(@|src/components)(/.*|$)"],
+              ["^(@|src/app)(/.*|$)"],
+              ["^(@|src/db)(/.*|$)"],
+              ["^(@|src/env)(/.*|$)"],
+              ["^(@|src/data)(/.*|$)"],
+              ["^(@|src/config)(/.*|$)"],
+              ["^(@|src/types)(/.*|$)"],
+              ["^(@|src/lib)(/.*|$)"],
+              // Side effect imports.
+              ["^\\u0000"],
+              // Parent imports. Put `..` last.
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+              // Style imports.
+              ["^.+\\.?(css)$"]
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

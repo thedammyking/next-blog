@@ -1,20 +1,21 @@
-import env from '@/env/api';
-import 'dotenv/config';
-
-import * as schema from '@/db/schema';
-
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 
+import * as schema from '@/db/schema';
+import env from '@/env/api';
+
+import 'dotenv/config';
+
 export const connection = postgres(env.DATABASE_URL, {
-	prepare: false,
+  prepare: false
 });
 
 export const db = drizzle(connection, {
-	schema,
-	logger: true,
+  schema,
+  logger: true
 });
 
+// eslint-disable-next-line no-redeclare
 export type db = typeof db;
 
 export default db;
