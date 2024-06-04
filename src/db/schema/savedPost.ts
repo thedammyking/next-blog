@@ -4,7 +4,7 @@ import { pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { post } from './post';
 import { user } from './user';
 
-export const like = pgTable('likes', {
+export const savedPost = pgTable('saved_posts', {
   id: uuid('id').primaryKey().defaultRandom(),
   readerId: uuid('reader_id'),
   postId: uuid('post_id'),
@@ -18,13 +18,13 @@ export const like = pgTable('likes', {
   deletedAt: timestamp('deleted_at', { mode: 'string', withTimezone: true })
 });
 
-export const likeRelations = relations(like, ({ one }) => ({
+export const savedPostRelations = relations(savedPost, ({ one }) => ({
   post: one(post, {
-    fields: [like.postId],
+    fields: [savedPost.postId],
     references: [post.id]
   }),
   reader: one(user, {
-    fields: [like.readerId],
+    fields: [savedPost.readerId],
     references: [user.id]
   })
 }));

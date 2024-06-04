@@ -15,7 +15,7 @@ async function resetTable(db: db, table: Table) {
 }
 
 (async () => {
-  for (const table of [schema.like, schema.post, schema.comment, schema.user]) {
+  for (const table of [schema.like, schema.savedPost, schema.post, schema.comment, schema.user]) {
     // await db.delete(table); // clear tables without truncating / resetting ids
     await resetTable(db, table);
   }

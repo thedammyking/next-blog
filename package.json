@@ -9,6 +9,7 @@
     "lint": "next lint --fix",
     "db:generate": "drizzle-kit up",
     "db:migrate": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
     "db:seed": "cross-env DB_SEEDING=true tsx src/db/seed.ts"
   },
   "dependencies": {

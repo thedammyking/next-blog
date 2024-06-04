@@ -4,7 +4,9 @@ import { pgTable, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
 import { UserRoles } from '@/types/db';
 
 import { comment } from './comment';
+import { like } from './like';
 import { post } from './post';
+import { savedPost } from './savedPost';
 
 export const user = pgTable('users', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -24,5 +26,7 @@ export const user = pgTable('users', {
 
 export const userRelations = relations(user, ({ many }) => ({
   posts: many(post),
-  comments: many(comment)
+  comments: many(comment),
+  likes: many(like),
+  savedPosts: many(savedPost)
 }));
