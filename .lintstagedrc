@@ -1,5 +1,0 @@
-{
-  "src/**/*.{js,jsx,ts,tsx}": ["next lint --fix --dir .", "prettier --write"],
-  "src/**/*.{css,scss}": ["prettier --write", "stylelint --allow-empty-input '**/*.{css,scss}'"],
-  "src/**/*.md": ["prettier --write"]
-}
