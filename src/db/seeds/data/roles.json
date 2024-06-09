@@ -1,0 +1,14 @@
+[
+  {
+    "value": "editor",
+    "label": "Editor"
+  },
+  {
+    "value": "super-admin",
+    "label": "Super Admin"
+  },
+  {
+    "value": "reader",
+    "label": "Reader"
+  }
+]
