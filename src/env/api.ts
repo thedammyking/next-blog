@@ -14,7 +14,10 @@ const EnvSchema = z.object({
   SUPABASE_URL: z.string(),
   SUPABASE_ANON_KEY: z.string(),
   DATABASE_URL: z.string(),
-  DB_SEEDING: stringBoolean
+  DB_SEEDING: stringBoolean,
+  SEED_SUPER_ADMIN_ID: z.string(),
+  SEED_EDITOR_ID: z.string(),
+  SEED_READER_ID: z.string()
 });
 
 // eslint-disable-next-line no-redeclare
