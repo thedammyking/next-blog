@@ -1,19 +1,13 @@
-import { eq } from 'drizzle-orm';
-
 import type { db } from '@/db';
 import * as schema from '@/db/schema';
-import { UserRoles } from '@/types/db';
+import env from '@/env/api';
 
 import comments from './data/comments.json';
 
 export default async function seed(db: db) {
-  const reader = await db.query.user.findFirst({
-    where: eq(schema.user.role, UserRoles.Reader)
-  });
-
   const posts = await db.query.post.findMany();
 
-  if (reader && posts.length > 0)
+  if (posts.length > 0)
     await Promise.all(
       comments.map(async comment => {
         const randomPostIndex = Math.floor(Math.random() * posts.length);
@@ -22,7 +16,7 @@ export default async function seed(db: db) {
           .insert(schema.comment)
           .values({
             ...comment,
-            readerId: reader.id,
+            readerId: env.SEED_READER_ID,
             postId: post.id
           })
           .returning();

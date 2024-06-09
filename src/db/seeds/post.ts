@@ -1,36 +1,25 @@
-import { eq } from 'drizzle-orm';
-
 import type { db } from '@/db';
 import * as schema from '@/db/schema';
-import { UserRoles } from '@/types/db';
+import env from '@/env/api';
 
 import posts from './data/posts.json';
 
 export default async function seed(db: db) {
-  const editor = await db.query.user.findFirst({
-    where: eq(schema.user.role, UserRoles.Editor)
-  });
+  await Promise.all(
+    posts.map(async (post, index) => {
+      const [insertedPost] = await db
+        .insert(schema.post)
+        .values({
+          ...post,
+          authorId: env.SEED_EDITOR_ID
+        })
+        .returning();
 
-  const reader = await db.query.user.findFirst({
-    where: eq(schema.user.role, UserRoles.Reader)
-  });
-
-  if (editor)
-    await Promise.all(
-      posts.map(async (post, index) => {
-        const [insertedPost] = await db
-          .insert(schema.post)
-          .values({
-            ...post,
-            authorId: editor.id
-          })
-          .returning();
-
-        if (reader && (index + 1) % 2)
-          await db.insert(schema.savedPost).values({
-            postId: insertedPost.id,
-            readerId: reader.id
-          });
-      })
-    );
+      if ((index + 1) % 2)
+        await db.insert(schema.savedPost).values({
+          postId: insertedPost.id,
+          readerId: env.SEED_READER_ID
+        });
+    })
+  );
 }
