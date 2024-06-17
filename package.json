@@ -13,6 +13,7 @@
     "db:seed": "cross-env DB_SEEDING=true tsx src/db/seed.ts"
   },
   "dependencies": {
+    "@sentry/nextjs": "^8",
     "@supabase/supabase-js": "^2.43.4",
     "classnames": "^2.5.1",
     "date-fns": "^3.6.0",
@@ -21,21 +22,15 @@
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
+    "@svgr/webpack": "^8.1.0",
     "@types/lodash": "^4.17.0",
-    "@types/node": "^20",
+    "@types/node": "^20.13.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@svgr/webpack": "^8.1.0",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
     "autoprefixer": "^10.4.19",
-    "bcrypt": "^5.1.1",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.4.5",
-    "dotenv-expand": "^11.0.6",
-    "drizzle-kit": "^0.22.1",
-    "drizzle-orm": "^0.31.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",
@@ -50,9 +45,7 @@
     "stylelint-config-recommended-scss": "^14.0.0",
     "stylelint-order": "^6.0.4",
     "stylelint-scss": "^6.2.1",
-    "postgres": "^3.4.4",
     "tailwindcss": "^3.4.1",
-    "tsx": "^4.11.2",
     "typescript": "^5",
     "zod": "^3.23.8"
   }

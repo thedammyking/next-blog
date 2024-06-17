@@ -28,14 +28,12 @@
               // Packages `react` related packages come first.
               ["^react", "^@?\\w"],
               // Internal packages.
-              ["^(@|src/components)(/.*|$)"],
               ["^(@|src/app)(/.*|$)"],
-              ["^(@|src/db)(/.*|$)"],
+              ["^(@|src/components)(/.*|$)"],
               ["^(@|src/env)(/.*|$)"],
               ["^(@|src/data)(/.*|$)"],
               ["^(@|src/config)(/.*|$)"],
               ["^(@|src/types)(/.*|$)"],
-              ["^(@|src/lib)(/.*|$)"],
               // Side effect imports.
               ["^\\u0000"],
               // Parent imports. Put `..` last.

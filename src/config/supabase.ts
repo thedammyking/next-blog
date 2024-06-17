@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-import env from '@/env/api';
+import * as env from '@/env';
 
 const setup = () => {
   if (!(env.SUPABASE_URL && env.SUPABASE_ANON_KEY)) {
